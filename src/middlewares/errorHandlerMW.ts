@@ -7,7 +7,7 @@ export default function errorHandlerMW(
     next: NextFunction
 ) {
     function errorMessageToStatusCode(message?: string) {
-        if (message === "Credenciais inválidas") return 401;
+        if (message === "Token inválido ou não enviado.") return 401;
         return 400;
     }
     return res.status(errorMessageToStatusCode(err.message)).send(err.message);
