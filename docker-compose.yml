@@ -1,6 +1,15 @@
 version: "3.8"
 
 services:
+    dietinha_database:
+        image: postgres:13
+        container_name: dietinha_database
+        restart: always
+        env_file:
+            - .env
+        ports:
+            - 6500:5432
+
     app:
         container_name: dietinha_backend_app
         env_file:
@@ -14,3 +23,5 @@ services:
             - type: bind
               source: ./
               target: /app
+        depends_on:
+            - dietinha_database
