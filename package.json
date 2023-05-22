@@ -6,6 +6,7 @@
     "scripts": {
         "start": "NODE_PATH=./build node build/server.js",
         "build": "tsc -p .",
+        "dev:container": "npm install && nodemon src/server.ts",
         "dev": "nodemon src/server.ts"
     },
     "keywords": [],

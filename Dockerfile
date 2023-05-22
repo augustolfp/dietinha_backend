@@ -4,5 +4,4 @@ WORKDIR /app
 
 EXPOSE 3000
 
-CMD ["npm", "install"]
-CMD ["npm","run","dev"]
+CMD ["npm","run","dev:container"]
