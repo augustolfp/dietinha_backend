@@ -11,7 +11,7 @@ datasource db {
 }
 
 model TacoTable {
-  id Int @id @default(autoincrement())
+  id String @id @default(uuid())
   description String
   baseQty Float
   proteins Float
@@ -19,4 +19,52 @@ model TacoTable {
   fats Float
   kcals Float
   @@map("tacoTable")
+}
+
+model CustomIngredientsTable {
+    id String @id @default(uuid())
+    userId String
+    description String
+    baseQty Float
+    proteins Float
+    carbs Float
+    fats Float
+    kcals Float
+    @@map("customIngredientsTable")
+}
+
+model Ingredients {
+  id String @id @default(uuid())
+  name String
+  meal Meals @relation(fields: [mealId], references: [id], onDelete: Cascade)
+  mealId String
+  weight Float
+  carbs Float
+  fats Float
+  proteins Float
+  kcals Float
+  @@map("ingredients")
+}
+
+model Meals {
+    id String @id @default(uuid())
+    name String
+    description String?
+    createdAt DateTime @default(now())
+    ingredients Ingredients[]
+    countedDay CountedDays @relation(fields: [countedDayId], references: [id], onDelete: Cascade)
+    countedDayId String
+    @@map("meals")
+
+}
+
+model CountedDays {
+    id String @id @default(uuid())
+    day DateTime @db.Date
+    notes String?
+    userId String
+    caloriesTarget Int
+    proteinsTarget Int
+    meals Meals[]
+    @@map("countedDays")
 }
