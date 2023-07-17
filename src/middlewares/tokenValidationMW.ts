@@ -15,7 +15,7 @@ export default async function tokenValidationMW(
 
     try {
         const decodeValue = await auth.verifyIdToken(token);
-        console.log(decodeValue);
+        res.locals.userData = decodeValue;
         return next();
     } catch (err) {
         throw Error("Token inválido ou não enviado.");
