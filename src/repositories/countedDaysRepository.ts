@@ -8,7 +8,7 @@ export async function addDay(countedDay: ICountedDayData) {
 }
 
 export async function getUserDays(userId: string) {
-    return await prisma.countedDays.findFirst({
+    return await prisma.countedDays.findMany({
         where: { userId: userId },
     });
 }
