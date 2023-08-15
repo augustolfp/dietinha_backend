@@ -18,4 +18,9 @@ docker compose -f docker-compose-dev.yml up --build
 
 **`A API já deve estar funcionando!`**
 
+Para acessar o pgAdmin e acompanhar o Banco de dados, acesse:
+http://localhost:5555
+
+As credenciais de acesso estão especificadas no Docker-compose.
+
 <br />
