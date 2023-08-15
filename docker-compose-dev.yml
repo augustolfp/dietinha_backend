@@ -4,13 +4,27 @@ services:
     dietinha_database:
         image: postgres:13
         container_name: dietinha_database
-        restart: always
+        hostname: dietinha_database
+        restart: unless-stopped
         env_file:
             - .env
         ports:
-            - 6500:5432
+            - 5432:5432
+
+    pgadmin:
+        image: dpage/pgadmin4
+        container_name: pgadmin
+        depends_on:
+            - dietinha_database
+        ports:
+            - "5555:80"
+        environment:
+            PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+            PGADMIN_DEFAULT_PASSWORD: admin
+        restart: unless-stopped
 
     app:
+        stdin_open: true
         container_name: dietinha_backend_app
         env_file:
             - .env
@@ -19,6 +33,7 @@ services:
             dockerfile: Dockerfile.development
         ports:
             - "3001:${PORT}"
+        restart: always
         volumes:
             - type: bind
               source: ./
