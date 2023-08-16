@@ -30,6 +30,7 @@ model CustomIngredientsTable {
     carbs Float
     fats Float
     kcals Float
+    @@unique([description, userId])
     @@map("customIngredientsTable")
 }
 
@@ -66,5 +67,6 @@ model CountedDays {
     caloriesTarget Int
     proteinsTarget Int
     meals Meals[]
+    @@unique([day, userId])
     @@map("countedDays")
 }
