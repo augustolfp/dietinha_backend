@@ -7,5 +7,5 @@ export async function insertMeal(req: Request, res: Response) {
 
     const result = await mealsService.createMeal(meal);
 
-    return res.status(201).send(insertMeal);
+    return res.status(201).send(result);
 }
