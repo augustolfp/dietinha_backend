@@ -11,5 +11,5 @@ export async function addDay(countedDay: ICountedDayData) {
 }
 
 export async function getUserDays(userId: string) {
-    return await countedDayRepo.getUserDays(userId);
+    return await countedDayRepo.getDaysSummarizedData(userId);
 }
