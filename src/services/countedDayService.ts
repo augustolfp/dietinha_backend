@@ -12,8 +12,26 @@ export async function addDay(countedDay: ICountedDayData) {
     });
 }
 
-export async function getUserDays(userId: string) {
-    return await countedDayRepo.getDaysSummarizedData(userId);
+export async function getUserDaysSummary(userId: string) {
+    const daysBasicInfo = await countedDayRepo.getUserDays(userId);
+
+    const getWithPromiseAll = async () => {
+        let data = await Promise.all(
+            daysBasicInfo.map(async (countedDay) => {
+                const nutrientsTotal =
+                    await ingredientsService.getNutrientTotalByDay(
+                        countedDay.id
+                    );
+                return {
+                    ...countedDay,
+                    ...nutrientsTotal,
+                };
+            })
+        );
+        return data;
+    };
+
+    return getWithPromiseAll();
 }
 
 export async function getCountedDayDetails(countedDayId: string) {

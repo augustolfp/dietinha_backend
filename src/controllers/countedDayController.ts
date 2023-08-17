@@ -15,7 +15,7 @@ export async function addDay(req: Request, res: Response) {
 export async function getDaysFromUser(req: Request, res: Response) {
     const userId = res.locals.userId;
 
-    const result = await countedDayService.getUserDays(userId);
+    const result = await countedDayService.getUserDaysSummary(userId);
     return res.status(200).send(result);
 }
 
