@@ -6,3 +6,13 @@ export async function createIngredient(ingredient: IIngredientData) {
         data: ingredient,
     });
 }
+
+export async function getIngredientsList(mealId: string) {
+    const ingredientsList = await prisma.ingredients.findMany({
+        where: {
+            mealId: mealId,
+        },
+    });
+
+    return ingredientsList;
+}

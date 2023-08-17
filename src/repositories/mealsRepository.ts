@@ -6,3 +6,13 @@ export async function createMeal(meal: IMealData) {
         data: meal,
     });
 }
+
+export async function getMealsList(countedDayId: string) {
+    const mealsList = await prisma.meals.findMany({
+        where: {
+            countedDayId: countedDayId,
+        },
+    });
+
+    return mealsList;
+}
