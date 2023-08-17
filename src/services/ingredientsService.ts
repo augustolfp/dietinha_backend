@@ -17,3 +17,11 @@ export async function createIngredient(ingredient: IIngredientData) {
 
     return await ingredientsRepo.createIngredient(truncIng);
 }
+
+export async function getNutrientTotalByDay(countedDayId: string) {
+    const query = await ingredientsRepo.getNutrientTotalByDay(countedDayId);
+
+    return {
+        ...query._sum,
+    };
+}
