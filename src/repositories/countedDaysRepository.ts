@@ -44,3 +44,11 @@ WHERE
 	cdays."userId" = ${userId}
     `;
 }
+
+export async function getDayBasicInfo(countedDayId: string) {
+    return await prisma.countedDays.findUnique({
+        where: {
+            id: countedDayId,
+        },
+    });
+}
