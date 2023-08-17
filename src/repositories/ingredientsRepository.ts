@@ -7,12 +7,32 @@ export async function createIngredient(ingredient: IIngredientData) {
     });
 }
 
-export async function getIngredientsList(mealId: string) {
+export async function getIngredientsSummary(mealId: string) {
     const ingredientsList = await prisma.ingredients.findMany({
         where: {
             mealId: mealId,
         },
     });
 
-    return ingredientsList;
+    const nutrientsSubTotal = await prisma.ingredients.aggregate({
+        _sum: {
+            carbs: true,
+            fats: true,
+            proteins: true,
+            kcals: true,
+        },
+        where: {
+            mealId: mealId,
+        },
+    });
+
+    const ingredientsSummary = {
+        carbs: nutrientsSubTotal._sum.carbs,
+        fats: nutrientsSubTotal._sum.fats,
+        proteins: nutrientsSubTotal._sum.proteins,
+        kcals: nutrientsSubTotal._sum.kcals,
+        ingredientsList: ingredientsList,
+    };
+
+    return ingredientsSummary;
 }

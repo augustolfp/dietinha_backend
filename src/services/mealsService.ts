@@ -12,11 +12,11 @@ export async function getMealsDetailsByDay(countedDayId: string) {
     const getWithPromiseAll = async () => {
         let data = await Promise.all(
             meals.map(async (meal) => {
+                const ingredientsSummary =
+                    await ingredientRepo.getIngredientsSummary(meal.id);
                 return {
                     ...meal,
-                    ingredientsList: await ingredientRepo.getIngredientsList(
-                        meal.id
-                    ),
+                    ...ingredientsSummary,
                 };
             })
         );
