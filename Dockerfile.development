@@ -4,4 +4,6 @@ WORKDIR /app
 
 EXPOSE 3001
 
+
+# All instructions in a Dockerfile except CMD (and one other that we will learn about soon) are executed during build time. CMD is executed when we call docker run, unless we overwrite it.
 CMD ["npm","run","dev:container"]

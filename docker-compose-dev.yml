@@ -10,7 +10,8 @@ services:
             - .env
         ports:
             - 5432:5432
-
+        volumes:
+            - database:/var/lib/postgresql/data
     pgadmin:
         image: dpage/pgadmin4
         entrypoint: >
@@ -30,9 +31,12 @@ services:
             PGADMIN_DEFAULT_PASSWORD: admin
             PGADMIN_CONFIG_SERVER_MODE: "False"
             PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: "False"
+        #Volumes: location-in-host:location-in-container
+        #Absolute path is not necessary
         volumes:
             - ./pgadmin/servers.json:/pgadmin4/servers.json
             - ./pgadmin/pgpass:/pgadmin4/pgpass
+            - pgadmin-data:/var/lib/pgadmin
         restart: unless-stopped
 
     app:
@@ -52,3 +56,7 @@ services:
               target: /app
         depends_on:
             - dietinha_database
+
+volumes:
+    database:
+    pgadmin-data:
