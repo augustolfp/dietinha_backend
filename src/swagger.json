@@ -1,1 +1,12 @@
-{}
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API for tracking macronutrients daily intake",
+        "description": "This API was built to track daily macronutrients intake of users, and provides a search mechanism on data provided by TACO table, from UNICAMP. User authentication is handled by google Firebase.",
+        "termsOfService": "http://localhost:3000/terms",
+        "contact": {
+            "email": "augustolfp@gmail.com"
+        },
+        "version": "1.0.0"
+    }
+}
