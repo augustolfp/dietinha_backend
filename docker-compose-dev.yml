@@ -48,7 +48,7 @@ services:
             context: .
             dockerfile: Dockerfile.development
         ports:
-            - "3001:${PORT}"
+            - "3001:3001"
         restart: always
         volumes:
             - type: bind
