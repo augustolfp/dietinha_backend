@@ -8,5 +8,50 @@
             "email": "augustolfp@gmail.com"
         },
         "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3001/",
+            "description": "Local development server automatically setup on docker container build"
+        }
+    ],
+    "paths": {
+        "/add-counted-day": {
+            "post": {
+                "summary": "Insert new counted day",
+                "description": "The user has to choose a Date to insert his daily meals",
+                "tags": ["Days"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CountedDay"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CountedDay": {
+                "type": "object",
+                "properties": {
+                    "day": {
+                        "type": "string"
+                    },
+                    "notes": {
+                        "type": "string"
+                    },
+                    "caloriesTarget": {
+                        "type": "number"
+                    },
+                    "proteinsTarget": {
+                        "type": "number"
+                    }
+                }
+            }
+        }
     }
 }
