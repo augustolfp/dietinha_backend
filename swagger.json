@@ -42,7 +42,30 @@
                         }
                     },
                     "422": {
-                        "description": "Invalid on incomplete Request Body"
+                        "description": "Invalid or incomplete Request Body"
+                    },
+                    "401": {
+                        "description": "Missing or Invalid Credentials"
+                    }
+                }
+            },
+            "get": {
+                "tags": ["Daily-Logs"],
+                "summary": "Get user's Daily Logs",
+                "description": "Returns a summary of calories intake by day, for specific user",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ReceivedDailyLog"
+                                    }
+                                }
+                            }
+                        }
                     },
                     "401": {
                         "description": "Missing or Invalid Credentials"
@@ -101,6 +124,22 @@
                     "proteinsTarget": {
                         "type": "number",
                         "example": 130
+                    },
+                    "carbs": {
+                        "type": "number",
+                        "example": 0
+                    },
+                    "fats": {
+                        "type": "number",
+                        "example": 0
+                    },
+                    "proteins": {
+                        "type": "number",
+                        "example": 0
+                    },
+                    "kcals": {
+                        "type": "number",
+                        "example": 0
                     }
                 }
             }
