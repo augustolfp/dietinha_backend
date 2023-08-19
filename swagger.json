@@ -72,6 +72,25 @@
                     }
                 }
             }
+        },
+        "/daily-log/{daily-log-id}": {
+            "get": {
+                "tags": ["Daily-Logs"],
+                "summary": "Get a detailed description of a specific user daily-log",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ReceivedDetailedDailyLog"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -140,6 +159,142 @@
                     "kcals": {
                         "type": "number",
                         "example": 0
+                    }
+                }
+            },
+            "Ingredient": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Arroz branco"
+                    },
+                    "mealId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "weight": {
+                        "type": "number",
+                        "example": 120
+                    },
+                    "carbs": {
+                        "type": "number",
+                        "example": 20
+                    },
+                    "fats": {
+                        "type": "number",
+                        "example": 5
+                    },
+                    "proteins": {
+                        "type": "number",
+                        "example": 3
+                    },
+                    "kcals": {
+                        "type": "number",
+                        "example": 250
+                    }
+                }
+            },
+            "Meal": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Almoço"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Pedi no Ifood"
+                    },
+                    "createdAt": {
+                        "type": "string"
+                    },
+                    "dailyLogId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "carbs": {
+                        "type": "number",
+                        "example": 20
+                    },
+                    "fats": {
+                        "type": "number",
+                        "example": 5
+                    },
+                    "proteins": {
+                        "type": "number",
+                        "example": 3
+                    },
+                    "kcals": {
+                        "type": "number",
+                        "example": 250
+                    },
+                    "ingredientsList": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "$ref": "#/components/schemas/Ingredient"
+                        }
+                    }
+                }
+            },
+            "ReceivedDetailedDailyLog": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "date": {
+                        "type": "string",
+                        "example": "yyyy-MM-dd"
+                    },
+                    "notes": {
+                        "type": "string",
+                        "example": "It was a busy day, couldn't cook anything myself"
+                    },
+                    "userId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "caloriesTarget": {
+                        "type": "number",
+                        "example": 2500
+                    },
+                    "proteinsTarget": {
+                        "type": "number",
+                        "example": 130
+                    },
+                    "carbs": {
+                        "type": "number",
+                        "example": 0
+                    },
+                    "fats": {
+                        "type": "number",
+                        "example": 0
+                    },
+                    "proteins": {
+                        "type": "number",
+                        "example": 0
+                    },
+                    "kcals": {
+                        "type": "number",
+                        "example": 0
+                    },
+                    "mealsList": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "$ref": "#/components/schemas/Meal"
+                        }
                     }
                 }
             }
