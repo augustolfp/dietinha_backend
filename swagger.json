@@ -15,18 +15,37 @@
         }
     ],
     "paths": {
-        "/add-counted-day": {
+        "/daily-log": {
             "post": {
-                "summary": "Insert new counted day",
-                "description": "The user has to choose a Date to insert his daily meals",
-                "tags": ["Days"],
+                "tags": ["Daily-Logs"],
+                "summary": "Insert new Daily Log",
+                "description": "The user has to create a Daily Log providing his unique Id and the date of the log (not necessarily the current date). The user will be identified through the Auth Token Payload.",
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/CountedDay"
+                                "$ref": "#/components/schemas/SentDailyLog"
                             }
                         }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ReceivedDailyLog"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Invalid on incomplete Request Body"
+                    },
+                    "401": {
+                        "description": "Missing or Invalid Credentials"
                     }
                 }
             }
@@ -34,20 +53,54 @@
     },
     "components": {
         "schemas": {
-            "CountedDay": {
+            "SentDailyLog": {
                 "type": "object",
+                "required": ["date", "caloriesTarget", "proteinsTarget"],
                 "properties": {
-                    "day": {
-                        "type": "string"
+                    "date": {
+                        "type": "string",
+                        "example": "yyyy-MM-dd"
                     },
                     "notes": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "It was a busy day, couldn't cook anything myself"
                     },
                     "caloriesTarget": {
-                        "type": "number"
+                        "type": "number",
+                        "example": 2500
                     },
                     "proteinsTarget": {
-                        "type": "number"
+                        "type": "number",
+                        "example": 130
+                    }
+                }
+            },
+            "ReceivedDailyLog": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "date": {
+                        "type": "string",
+                        "example": "yyyy-MM-dd"
+                    },
+                    "notes": {
+                        "type": "string",
+                        "example": "It was a busy day, couldn't cook anything myself"
+                    },
+                    "userId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "caloriesTarget": {
+                        "type": "number",
+                        "example": 2500
+                    },
+                    "proteinsTarget": {
+                        "type": "number",
+                        "example": 130
                     }
                 }
             }
