@@ -7,10 +7,10 @@ export async function createMeal(meal: IMealData) {
     });
 }
 
-export async function getMealsList(countedDayId: string) {
+export async function getMealsList(dailyLogId: string) {
     const mealsList = await prisma.meals.findMany({
         where: {
-            countedDayId: countedDayId,
+            dailyLogId: dailyLogId,
         },
     });
 

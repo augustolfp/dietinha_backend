@@ -37,7 +37,7 @@ export async function getIngredientsSummary(mealId: string) {
     return ingredientsSummary;
 }
 
-export async function getNutrientTotalByDay(countedDayId: string) {
+export async function getNutrientTotalByDay(dailyLogId: string) {
     return await prisma.ingredients.aggregate({
         _sum: {
             carbs: true,
@@ -47,7 +47,7 @@ export async function getNutrientTotalByDay(countedDayId: string) {
         },
         where: {
             meal: {
-                countedDayId: countedDayId,
+                dailyLogId: dailyLogId,
             },
         },
     });

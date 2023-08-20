@@ -53,20 +53,20 @@ model Meals {
     description String?
     createdAt DateTime @default(now())
     ingredients Ingredients[]
-    countedDay CountedDays @relation(fields: [countedDayId], references: [id], onDelete: Cascade)
-    countedDayId String
+    dailyLog DailyLogs @relation(fields: [dailyLogId], references: [id], onDelete: Cascade)
+    dailyLogId String
     @@map("meals")
 
 }
 
-model CountedDays {
+model DailyLogs {
     id String @id @default(uuid())
-    day DateTime @db.Date
+    date DateTime @db.Date
     notes String?
     userId String
     caloriesTarget Int
     proteinsTarget Int
     meals Meals[]
-    @@unique([day, userId])
-    @@map("countedDays")
+    @@unique([date, userId])
+    @@map("dailyLogs")
 }

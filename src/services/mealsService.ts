@@ -6,8 +6,8 @@ export async function createMeal(meal: IMealData) {
     return await mealRepo.createMeal(meal);
 }
 
-export async function getMealsDetailsByDay(countedDayId: string) {
-    const meals = await mealRepo.getMealsList(countedDayId);
+export async function getMealsDetailsByDay(dailyLogId: string) {
+    const meals = await mealRepo.getMealsList(dailyLogId);
 
     const getWithPromiseAll = async () => {
         let data = await Promise.all(
