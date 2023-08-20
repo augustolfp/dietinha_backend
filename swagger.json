@@ -298,6 +298,19 @@
                     }
                 }
             }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "description": "Authentication using JWT provided by firebaseAuth",
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
         }
-    }
+    },
+    "security": [
+        {
+            "bearerAuth": []
+        }
+    ]
 }
