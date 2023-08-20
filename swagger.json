@@ -1,5 +1,5 @@
 {
-    "openapi": "3.1.0",
+    "openapi": "3.0.0",
     "info": {
         "title": "Dietinha Calories Tracker",
         "description": "This API was built to track daily macronutrients intake of users, and provides a search mechanism on data provided by TACO-Unicamp.",
@@ -41,11 +41,14 @@
                             }
                         }
                     },
-                    "422": {
-                        "description": "Invalid or incomplete Request Body"
-                    },
                     "401": {
                         "description": "Missing or Invalid Credentials"
+                    },
+                    "403": {
+                        "description": "User already have a Daily-log in provided Date"
+                    },
+                    "422": {
+                        "description": "Invalid or incomplete Request Body"
                     }
                 }
             },
