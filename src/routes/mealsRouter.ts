@@ -7,7 +7,7 @@ import { mealSchema } from "../schemas/mealsSchemas";
 const mealsRouter = Router();
 
 mealsRouter.post(
-    "/add-meal",
+    "/meal",
     tokenValidationMW,
     validateSchemaMW(mealSchema),
     mealsController.insertMeal

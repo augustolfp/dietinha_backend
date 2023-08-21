@@ -112,6 +112,44 @@
                     }
                 }
             }
+        },
+        "/meal": {
+            "post": {
+                "tags": ["Meals"],
+                "summary": "Insert new Meal, as a part of a Daily-Log",
+                "description": "",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SentMeal"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ReceivedMeal"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or Invalid Credentials"
+                    },
+                    "404": {
+                        "description": "User does not have a daily-log with provided id"
+                    },
+                    "422": {
+                        "description": "Invalid or incomplete Request Body"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -293,6 +331,48 @@
                             "type": "object",
                             "$ref": "#/components/schemas/Ingredient"
                         }
+                    }
+                }
+            },
+            "ReceivedMeal": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Almoço"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Pedi no Ifood"
+                    },
+                    "createdAt": {
+                        "type": "string"
+                    },
+                    "dailyLogId": {
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                }
+            },
+            "SentMeal": {
+                "type": "object",
+                "required": ["name", "dailyLogId"],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Almoço"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Pedi no Ifood"
+                    },
+                    "dailyLogId": {
+                        "type": "string",
+                        "format": "uuid"
                     }
                 }
             },

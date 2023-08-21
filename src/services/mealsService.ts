@@ -1,8 +1,18 @@
 import * as mealRepo from "../repositories/mealsRepository";
 import * as ingredientRepo from "../repositories/ingredientsRepository";
+import * as dailyLogRepo from "../repositories/dailyLogsRepository";
 import { IMealData } from "../types/mealType";
+import { ApiError } from "../helpers/api-errors";
 
-export async function createMeal(meal: IMealData) {
+export async function createMeal(meal: IMealData, userId: string) {
+    const dailyLog = await dailyLogRepo.getDayBasicInfo(meal.dailyLogId);
+
+    if (dailyLog.userId !== userId) {
+        throw new ApiError(
+            "User does not have a daily-log with provided id",
+            404
+        );
+    }
     return await mealRepo.createMeal(meal);
 }
 
