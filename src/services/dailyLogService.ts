@@ -38,6 +38,7 @@ export async function getUserDaysSummary(userId: string) {
                     await ingredientsService.getNutrientTotalByDay(dailyLog.id);
                 return {
                     ...dailyLog,
+                    date: format(dailyLog.date, "yyyy-MM-dd"),
                     ...nutrientsTotal,
                 };
             })

@@ -20,8 +20,11 @@ export async function createIngredient(ingredient: IIngredientData) {
 
 export async function getNutrientTotalByDay(countedDayId: string) {
     const query = await ingredientsRepo.getNutrientTotalByDay(countedDayId);
-
-    return {
-        ...query._sum,
+    const sum = {
+        carbs: query._sum.carbs ?? 0,
+        fats: query._sum.fats ?? 0,
+        proteins: query._sum.proteins ?? 0,
+        kcals: query._sum.kcals ?? 0,
     };
+    return sum;
 }

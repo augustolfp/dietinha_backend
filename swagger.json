@@ -64,7 +64,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/ReceivedDailyLog"
+                                        "$ref": "#/components/schemas/ReceivedDailyLogArray"
                                     }
                                 }
                             }
@@ -146,6 +146,51 @@
                     "proteinsTarget": {
                         "type": "number",
                         "example": 130
+                    }
+                }
+            },
+            "ReceivedDailyLogArray": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "date": {
+                        "type": "string",
+                        "example": "yyyy-MM-dd"
+                    },
+                    "notes": {
+                        "type": "string",
+                        "example": "It was a busy day, couldn't cook anything myself"
+                    },
+                    "userId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "caloriesTarget": {
+                        "type": "number",
+                        "example": 2500
+                    },
+                    "proteinsTarget": {
+                        "type": "number",
+                        "example": 130
+                    },
+                    "carbs": {
+                        "type": "number",
+                        "example": 0
+                    },
+                    "fats": {
+                        "type": "number",
+                        "example": 0
+                    },
+                    "proteins": {
+                        "type": "number",
+                        "example": 0
+                    },
+                    "kcals": {
+                        "type": "number",
+                        "example": 0
                     }
                 }
             },
