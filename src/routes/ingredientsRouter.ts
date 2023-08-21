@@ -7,7 +7,7 @@ import { ingredientSchema } from "../schemas/ingredientsSchemas";
 const ingredientsRouter = Router();
 
 ingredientsRouter.post(
-    "/add-ingredients",
+    "/ingredient",
     tokenValidationMW,
     validateSchemaMW(ingredientSchema),
     ingredientsController.insertIngredient

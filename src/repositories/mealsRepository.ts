@@ -16,3 +16,20 @@ export async function getMealsList(dailyLogId: string) {
 
     return mealsList;
 }
+
+export async function getMealOwner(mealId: string) {
+    const owner = await prisma.meals.findUnique({
+        where: {
+            id: mealId,
+        },
+        select: {
+            dailyLog: {
+                select: {
+                    userId: true,
+                },
+            },
+        },
+    });
+
+    return owner.dailyLog.userId;
+}

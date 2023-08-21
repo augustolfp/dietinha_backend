@@ -1,7 +1,18 @@
 import * as ingredientsRepo from "../repositories/ingredientsRepository";
+import * as mealsRepo from "../repositories/mealsRepository";
 import { IIngredientData } from "../types/ingredientType";
+import { ApiError } from "../helpers/api-errors";
 
-export async function createIngredient(ingredient: IIngredientData) {
+export async function createIngredient(
+    ingredient: IIngredientData,
+    userId: string
+) {
+    const mealOwnerId = await mealsRepo.getMealOwner(ingredient.mealId);
+
+    if (mealOwnerId !== userId) {
+        throw new ApiError("User does not have a meal with provided id", 404);
+    }
+
     const truncNumber = (number: number) => {
         return Number(number.toFixed(2));
     };

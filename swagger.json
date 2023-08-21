@@ -150,6 +150,44 @@
                     }
                 }
             }
+        },
+        "/ingredient": {
+            "post": {
+                "tags": ["Ingredients"],
+                "summary": "Insert new Ingredient, as a part of a Meal",
+                "description": "",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SentIngredient"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Ingredient"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or Invalid Credentials"
+                    },
+                    "404": {
+                        "description": "User does not have a meal with provided id"
+                    },
+                    "422": {
+                        "description": "Invalid or incomplete Request Body"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -257,6 +295,39 @@
                         "type": "string",
                         "format": "uuid"
                     },
+                    "name": {
+                        "type": "string",
+                        "example": "Arroz branco"
+                    },
+                    "mealId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "weight": {
+                        "type": "number",
+                        "example": 120
+                    },
+                    "carbs": {
+                        "type": "number",
+                        "example": 20
+                    },
+                    "fats": {
+                        "type": "number",
+                        "example": 5
+                    },
+                    "proteins": {
+                        "type": "number",
+                        "example": 3
+                    },
+                    "kcals": {
+                        "type": "number",
+                        "example": 250
+                    }
+                }
+            },
+            "SentIngredient": {
+                "type": "object",
+                "properties": {
                     "name": {
                         "type": "string",
                         "example": "Arroz branco"
