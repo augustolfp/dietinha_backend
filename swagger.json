@@ -81,6 +81,18 @@
                 "tags": ["Daily-Logs"],
                 "summary": "Get a detailed description of a specific user daily-log",
                 "description": "",
+                "parameters": [
+                    {
+                        "name": "daily-log-id",
+                        "in": "path",
+                        "description": "Id of the daily-log",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation",
@@ -91,6 +103,12 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "Missing or Invalid Credentials"
+                    },
+                    "404": {
+                        "description": "User does not have a daily-log with provided id"
                     }
                 }
             }

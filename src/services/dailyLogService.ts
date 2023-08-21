@@ -49,9 +49,18 @@ export async function getUserDaysSummary(userId: string) {
     return getWithPromiseAll();
 }
 
-export async function getDailyLogDetails(dailyLogId: string) {
-    const mealsList = await mealsService.getMealsDetailsByDay(dailyLogId);
+export async function getDailyLogDetails(dailyLogId: string, userId: string) {
     const dayBasicInfo = await dailyLogRepo.getDayBasicInfo(dailyLogId);
+
+    if (dayBasicInfo.userId !== userId) {
+        throw new ApiError(
+            "User does not have a daily-log with provided id",
+            404
+        );
+    }
+
+    const mealsList = await mealsService.getMealsDetailsByDay(dailyLogId);
+
     const dayNutrientTotal = await ingredientsService.getNutrientTotalByDay(
         dailyLogId
     );
@@ -59,7 +68,7 @@ export async function getDailyLogDetails(dailyLogId: string) {
     const detailedDailyLog = {
         ...dayBasicInfo,
         ...dayNutrientTotal,
-        mealsList: mealsList,
+        mealsList: [...mealsList],
     };
 
     return detailedDailyLog;
