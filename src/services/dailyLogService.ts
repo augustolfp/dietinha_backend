@@ -1,15 +1,31 @@
+import { format } from "date-fns";
 import * as dailyLogRepo from "../repositories/dailyLogsRepository";
 import * as mealsService from "./mealsService";
 import * as ingredientsService from "./ingredientsService";
 import { IDailyLogData } from "../types/dailyLogType";
+import { ApiError } from "../helpers/api-errors";
 
 export async function addDay(dailyLog: IDailyLogData) {
     const date = new Date(dailyLog.date);
 
-    return await dailyLogRepo.addDay({
-        ...dailyLog,
-        date: date,
-    });
+    try {
+        const newDailyLog = await dailyLogRepo.addDay({
+            ...dailyLog,
+            date: date,
+        });
+        return {
+            ...newDailyLog,
+            date: format(newDailyLog.date, "yyyy-MM-dd"),
+        };
+    } catch (e) {
+        if (e.code === "P2002") {
+            throw new ApiError(
+                "User already have a Daily-log in provided Date",
+                403
+            );
+        }
+        throw e;
+    }
 }
 
 export async function getUserDaysSummary(userId: string) {

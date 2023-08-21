@@ -146,22 +146,6 @@
                     "proteinsTarget": {
                         "type": "number",
                         "example": 130
-                    },
-                    "carbs": {
-                        "type": "number",
-                        "example": 0
-                    },
-                    "fats": {
-                        "type": "number",
-                        "example": 0
-                    },
-                    "proteins": {
-                        "type": "number",
-                        "example": 0
-                    },
-                    "kcals": {
-                        "type": "number",
-                        "example": 0
                     }
                 }
             },
