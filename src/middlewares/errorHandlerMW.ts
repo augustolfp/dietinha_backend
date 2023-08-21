@@ -1,14 +1,13 @@
 import { NextFunction, Request, Response } from "express";
+import { ApiError } from "../helpers/api-errors";
 
 export default function errorHandlerMW(
-    err: Error,
+    err: Error & Partial<ApiError>,
     req: Request,
     res: Response,
     next: NextFunction
 ) {
-    function errorMessageToStatusCode(message?: string) {
-        if (message === "Token inválido ou não enviado.") return 401;
-        return 400;
-    }
-    return res.status(errorMessageToStatusCode(err.message)).send(err.message);
+    const statusCode = err.statusCode ?? 500;
+    const message = err.statusCode ? err.message : "Internal Server Error";
+    return res.status(statusCode).json({ message });
 }

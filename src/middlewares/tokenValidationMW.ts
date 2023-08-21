@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import auth from "../firebase/firebaseConfig";
+import { ApiError } from "../helpers/api-errors";
 
 export default async function tokenValidationMW(
     req: Request,
@@ -10,7 +11,7 @@ export default async function tokenValidationMW(
     const token = authorization?.replace("Bearer ", "");
 
     if (!token) {
-        throw Error("Token inválido ou não enviado.");
+        throw new ApiError("Missing or Invalid Credentials", 401);
     }
 
     try {
@@ -18,6 +19,6 @@ export default async function tokenValidationMW(
         res.locals.userId = decodeValue.uid;
         return next();
     } catch (err) {
-        throw Error("Token inválido ou não enviado.");
+        throw new ApiError("Missing or Invalid Credentials", 401);
     }
 }
