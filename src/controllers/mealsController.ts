@@ -10,3 +10,12 @@ export async function insertMeal(req: Request, res: Response) {
 
     return res.status(201).send(result);
 }
+
+export async function deleteMeal(req: Request, res: Response) {
+    const mealId: string = req.params.mealId;
+    const userId: string = res.locals.userId;
+
+    await mealsService.deleteMeal(mealId, userId);
+
+    return res.status(200).send("Successful operation");
+}

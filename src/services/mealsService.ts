@@ -38,3 +38,13 @@ export async function getMealsDetailsByDay(dailyLogId: string) {
 
     return getWithPromiseAll();
 }
+
+export async function deleteMeal(mealId: string, userId: string) {
+    const mealOwnerId = await mealRepo.getMealOwner(mealId);
+
+    if (mealOwnerId !== userId) {
+        throw new ApiError("User does not have a meal with provided id", 404);
+    }
+
+    return await mealRepo.deleteMeal(mealId);
+}

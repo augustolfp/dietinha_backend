@@ -33,3 +33,11 @@ export async function getMealOwner(mealId: string) {
 
     return owner.dailyLog.userId;
 }
+
+export async function deleteMeal(mealId: string) {
+    return await prisma.meals.delete({
+        where: {
+            id: mealId,
+        },
+    });
+}

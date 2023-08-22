@@ -13,4 +13,10 @@ mealsRouter.post(
     mealsController.insertMeal
 );
 
+mealsRouter.delete(
+    "/meal/:mealId",
+    tokenValidationMW,
+    mealsController.deleteMeal
+);
+
 export default mealsRouter;
