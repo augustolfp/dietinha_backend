@@ -20,3 +20,11 @@ export async function getDayBasicInfo(dailyLogId: string) {
         },
     });
 }
+
+export async function deleteDay(dailyLogId: string) {
+    return await prisma.dailyLogs.delete({
+        where: {
+            id: dailyLogId,
+        },
+    });
+}

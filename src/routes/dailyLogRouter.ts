@@ -25,4 +25,10 @@ dailyLogRouter.get(
     dailyLogController.getDayDetailed
 );
 
+dailyLogRouter.delete(
+    "/daily-log/:dailyLogId",
+    tokenValidationMW,
+    dailyLogController.deleteDailyLog
+);
+
 export default dailyLogRouter;

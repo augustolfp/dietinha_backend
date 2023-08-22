@@ -75,3 +75,17 @@ export async function getDailyLogDetails(dailyLogId: string, userId: string) {
 
     return detailedDailyLog;
 }
+
+export async function deleteDay(dailyLogId: string, userId: string) {
+    const dailyLog = await dailyLogRepo.getDayBasicInfo(dailyLogId);
+    const dailyLogOwnerId = dailyLog.userId;
+
+    if (dailyLogOwnerId !== userId) {
+        throw new ApiError(
+            "User does not have a daily-log with provided id",
+            404
+        );
+    }
+
+    return await dailyLogRepo.deleteDay(dailyLogId);
+}

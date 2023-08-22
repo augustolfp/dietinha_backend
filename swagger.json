@@ -111,6 +111,34 @@
                         "description": "User does not have a daily-log with provided id"
                     }
                 }
+            },
+            "delete": {
+                "tags": ["Daily-Logs"],
+                "summary": "Delete one daily-log",
+                "description": "All meals and ingredients related to this meal will also be deleted",
+                "parameters": [
+                    {
+                        "name": "daily-log-id",
+                        "in": "path",
+                        "description": "Id of the daily-log to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Missing or Invalid Credentials"
+                    },
+                    "404": {
+                        "description": "User does not have a daily-log with provided id"
+                    }
+                }
             }
         },
         "/meal": {
