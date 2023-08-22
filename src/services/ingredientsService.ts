@@ -39,3 +39,17 @@ export async function getNutrientTotalByDay(countedDayId: string) {
     };
     return sum;
 }
+
+export async function deleteIngredient(ingredientId: string, userId: string) {
+    const { mealId } = await ingredientsRepo.findIngredient(ingredientId);
+    const ingredientOwner = await mealsRepo.getMealOwner(mealId);
+
+    if (ingredientOwner !== userId) {
+        throw new ApiError(
+            "User does not have a ingredient with provided id",
+            404
+        );
+    }
+
+    return await ingredientsRepo.deleteIngredient(ingredientId);
+}

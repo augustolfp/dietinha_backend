@@ -13,4 +13,10 @@ ingredientsRouter.post(
     ingredientsController.insertIngredient
 );
 
+ingredientsRouter.delete(
+    "/ingredient/:ingredientId",
+    tokenValidationMW,
+    ingredientsController.deleteIngredient
+);
+
 export default ingredientsRouter;

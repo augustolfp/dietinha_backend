@@ -13,3 +13,12 @@ export async function insertIngredient(req: Request, res: Response) {
 
     return res.status(201).send(result);
 }
+
+export async function deleteIngredient(req: Request, res: Response) {
+    const ingredientId: string = req.params.ingredientId;
+    const userId = res.locals.userId;
+
+    await ingredientsService.deleteIngredient(ingredientId, userId);
+
+    return res.status(200).send("Successful operation");
+}

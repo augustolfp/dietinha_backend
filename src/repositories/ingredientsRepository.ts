@@ -52,3 +52,19 @@ export async function getNutrientTotalByDay(dailyLogId: string) {
         },
     });
 }
+
+export async function findIngredient(ingredientId: string) {
+    return await prisma.ingredients.findUnique({
+        where: {
+            id: ingredientId,
+        },
+    });
+}
+
+export async function deleteIngredient(ingredientId: string) {
+    return await prisma.ingredients.delete({
+        where: {
+            id: ingredientId,
+        },
+    });
+}
