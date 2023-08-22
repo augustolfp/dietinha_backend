@@ -13,7 +13,10 @@ export async function createMeal(meal: IMealData, userId: string) {
             404
         );
     }
-    return await mealRepo.createMeal(meal);
+    return await mealRepo.createMeal({
+        ...meal,
+        description: meal.description ?? "",
+    });
 }
 
 export async function getMealsDetailsByDay(dailyLogId: string) {

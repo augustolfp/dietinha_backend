@@ -27,10 +27,10 @@ export async function getIngredientsSummary(mealId: string) {
     });
 
     const ingredientsSummary = {
-        carbs: nutrientsSubTotal._sum.carbs,
-        fats: nutrientsSubTotal._sum.fats,
-        proteins: nutrientsSubTotal._sum.proteins,
-        kcals: nutrientsSubTotal._sum.kcals,
+        carbs: nutrientsSubTotal._sum.carbs ?? 0,
+        fats: nutrientsSubTotal._sum.fats ?? 0,
+        proteins: nutrientsSubTotal._sum.proteins ?? 0,
+        kcals: nutrientsSubTotal._sum.kcals ?? 0,
         ingredientsList: ingredientsList,
     };
 
