@@ -12,6 +12,7 @@ export async function addDay(dailyLog: IDailyLogData) {
         const newDailyLog = await dailyLogRepo.addDay({
             ...dailyLog,
             date: date,
+            notes: dailyLog.notes ?? "",
         });
         return {
             ...newDailyLog,
