@@ -68,6 +68,7 @@ export async function getDailyLogDetails(dailyLogId: string, userId: string) {
 
     const detailedDailyLog = {
         ...dayBasicInfo,
+        date: format(dayBasicInfo.date, "yyyy-MM-dd"),
         ...dayNutrientTotal,
         mealsList: [...mealsList],
     };
