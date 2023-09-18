@@ -28,8 +28,5 @@ jobs:
                   json: ${{secrets.FIREBASE_PRIVATE_KEY}}
                   dir: "src/firebase/"
 
-            - name: Build
-              run: docker compose down
-
             - name: Run
               run: docker compose -f docker-compose-prod.yml up --build -d
