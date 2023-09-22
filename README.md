@@ -42,6 +42,10 @@ Para acessar rotas autenticadas, será necessário obter um _Access Token_, forn
 
 <br />
 
+Mais informações a respeito da aplicação _standalone_ em [/standalone_authentication](https://github.com/augustolfp/dietinha_backend/tree/main/standalone_authentication).
+
+<br />
+
 # Como configurar um ambiente de desenvolvimento
 
 Esta API pode ser executada em um ambiente de desenvolvimento utilizando o _Docker_:
