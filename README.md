@@ -34,6 +34,14 @@ A documentação dos _Endpoints_ no padrão _OpenAPI_ pode ser conferida no segu
 
 <br />
 
+Para acessar rotas autenticadas, será necessário obter um _Access Token_, fornecido pelo _Firebase Auth_.
+
+É possível obter um _Access Token_ válido sem a necessidade do _Frontend_, através da aplicação React _standalone_ que foi implementada neste repositório, e está disponível em:
+
+<div align="center"><a href="https://api.dietinha.co/v2/standalone-auth">https://api.dietinha.co/v2/standalone-auth</a></div>
+
+<br />
+
 # Como configurar um ambiente de desenvolvimento
 
 Esta API pode ser executada em um ambiente de desenvolvimento utilizando o _Docker_:

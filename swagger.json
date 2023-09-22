@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "Dietinha Calories Tracker",
-        "description": "This API was built to track daily macronutrients intake of users, and provides a search mechanism on data provided by TACO-Unicamp.",
+        "description": "This API was built to track daily macronutrients intake of users, and provides a search mechanism on data provided by TACO-Unicamp. You need a valid Access Token (provided by Firebase Auth) to access protected Endpoints.\n\nTo generate an Access Token, you can use the Standalone App:\n- [Dietinha Standalone Authentication app](https://api.dietinha.co/v2/standalone-auth)",
         "contact": {
             "email": "augustolfp@gmail.com"
         },
@@ -589,7 +589,7 @@
         },
         "securitySchemes": {
             "bearerAuth": {
-                "description": "Authentication using JWT provided by firebaseAuth",
+                "description": "JWT provided by firebaseAuth. Use the Standalone app to get an Access Token.",
                 "type": "http",
                 "scheme": "bearer",
                 "bearerFormat": "JWT"
