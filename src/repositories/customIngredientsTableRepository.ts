@@ -6,3 +6,16 @@ export async function createCustomIng(customIng: ICustomIngredientTableData) {
         data: customIng,
     });
 }
+
+export async function search(term: string, userId: string) {
+    return await prisma.customIngredientsTable.findMany({
+        where: {
+            description: {
+                contains: term,
+            },
+            userId: {
+                equals: userId,
+            },
+        },
+    });
+}

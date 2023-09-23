@@ -298,16 +298,16 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/TacoTableItem"
-                                    }
+                                    "$ref": "#/components/schemas/SearchResult"
                                 }
                             }
                         }
                     },
                     "401": {
                         "description": "Missing or Invalid Credentials"
+                    },
+                    "403": {
+                        "description": "Search term has a minimum of 3 characters"
                     }
                 }
             }
@@ -756,6 +756,25 @@
                     "kcals": {
                         "type": "number",
                         "example": 250
+                    }
+                }
+            },
+            "SearchResult": {
+                "type": "object",
+                "properties": {
+                    "tacoResults": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "$ref": "#/components/schemas/TacoTableItem"
+                        }
+                    },
+                    "customResults": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "$ref": "#/components/schemas/ReceivedCustomLog"
+                        }
                     }
                 }
             }
