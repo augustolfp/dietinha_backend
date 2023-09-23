@@ -12,10 +12,20 @@ export async function search(term: string, userId: string) {
         where: {
             description: {
                 contains: term,
+                mode: "insensitive",
             },
             userId: {
                 equals: userId,
             },
+        },
+        select: {
+            id: true,
+            description: true,
+            baseQty: true,
+            proteins: true,
+            carbs: true,
+            fats: true,
+            kcals: true,
         },
     });
 }

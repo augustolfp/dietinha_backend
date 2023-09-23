@@ -5,6 +5,7 @@ export async function search(term: string) {
         where: {
             description: {
                 contains: term,
+                mode: "insensitive",
             },
         },
     });

@@ -773,7 +773,7 @@
                         "type": "array",
                         "items": {
                             "type": "object",
-                            "$ref": "#/components/schemas/ReceivedCustomLog"
+                            "$ref": "#/components/schemas/TacoTableItem"
                         }
                     }
                 }
