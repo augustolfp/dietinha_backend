@@ -4,6 +4,10 @@ import tokenValidationMW from "../middlewares/tokenValidationMW";
 
 const searchRouter = Router();
 
-searchRouter.get("/search/:term", tokenValidationMW, searchController.search);
+searchRouter.get(
+    "/datatable/search/:term",
+    tokenValidationMW,
+    searchController.search
+);
 
 export default searchRouter;

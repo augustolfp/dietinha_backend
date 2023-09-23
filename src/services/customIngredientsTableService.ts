@@ -1,5 +1,6 @@
 import * as customIngTableRepo from "../repositories/customIngredientsTableRepository";
 import { ICustomIngredientTableData } from "../types/customIngredientTableType";
+import { ApiError } from "../helpers/api-errors";
 
 export async function createCustomIng(
     customIngData: Omit<ICustomIngredientTableData, "userId">,
@@ -19,5 +20,16 @@ export async function createCustomIng(
         kcals: truncNumber(customIngData.kcals),
     };
 
-    return await customIngTableRepo.createCustomIng(truncIng);
+    try {
+        const newCustomLog = await customIngTableRepo.createCustomIng(truncIng);
+        return newCustomLog;
+    } catch (e) {
+        if (e.code === "P2002") {
+            throw new ApiError(
+                "User already have a Nutrition Log with provided description",
+                403
+            );
+        }
+        throw e;
+    }
 }

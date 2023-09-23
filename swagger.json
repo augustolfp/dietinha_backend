@@ -276,16 +276,16 @@
                 }
             }
         },
-        "/search/{searchTerm}": {
+        "/datatable/search/{searchTerm}": {
             "get": {
-                "tags": ["Ingredients"],
-                "summary": "Search for ingredients, from TACO table and Favorite Ingredients",
+                "tags": ["Data Table (Food Database)"],
+                "summary": "Search for food nutrient profiles, from TACO table and CustomIngredients table",
                 "description": "",
                 "parameters": [
                     {
                         "name": "searchTerm",
                         "in": "path",
-                        "description": "The name (or part of the name) of the ingredient",
+                        "description": "The name (or part of the name) of the ingredient. Ex: ovo",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -308,6 +308,44 @@
                     },
                     "401": {
                         "description": "Missing or Invalid Credentials"
+                    }
+                }
+            }
+        },
+        "/datatable/custom": {
+            "post": {
+                "tags": ["Data Table (Food Database)"],
+                "summary": "Add a private custom food nutrition profile",
+                "description": "",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SentCustomLog"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ReceivedCustomLog"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or Invalid Credentials"
+                    },
+                    "403": {
+                        "description": "User already have a Nutrition Log with provided description"
+                    },
+                    "422": {
+                        "description": "Invalid or incomplete Request Body"
                     }
                 }
             }
@@ -652,6 +690,72 @@
                             "type": "object",
                             "$ref": "#/components/schemas/Meal"
                         }
+                    }
+                }
+            },
+            "SentCustomLog": {
+                "type": "object",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "example": "Whey Protein Growth"
+                    },
+                    "baseQty": {
+                        "type": "number",
+                        "example": 100
+                    },
+                    "carbs": {
+                        "type": "number",
+                        "example": 20
+                    },
+                    "fats": {
+                        "type": "number",
+                        "example": 5
+                    },
+                    "proteins": {
+                        "type": "number",
+                        "example": 3
+                    },
+                    "kcals": {
+                        "type": "number",
+                        "example": 250
+                    }
+                }
+            },
+            "ReceivedCustomLog": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "userId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Whey Protein Growth"
+                    },
+                    "baseQty": {
+                        "type": "number",
+                        "example": 100
+                    },
+                    "carbs": {
+                        "type": "number",
+                        "example": 20
+                    },
+                    "fats": {
+                        "type": "number",
+                        "example": 5
+                    },
+                    "proteins": {
+                        "type": "number",
+                        "example": 3
+                    },
+                    "kcals": {
+                        "type": "number",
+                        "example": 250
                     }
                 }
             }

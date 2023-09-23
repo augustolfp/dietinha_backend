@@ -7,7 +7,7 @@ import { customIngSchema } from "../schemas/customIngredientsSchemas";
 const customIngredientsTableRouter = Router();
 
 customIngredientsTableRouter.post(
-    "/add-custom-ingredient",
+    "/datatable/custom",
     tokenValidationMW,
     validateSchemaMW(customIngSchema),
     customIngTableController.insertCustomIng
