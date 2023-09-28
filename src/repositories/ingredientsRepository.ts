@@ -8,11 +8,11 @@ export async function createIngredient(ingredient: IIngredientData) {
 }
 
 export async function getIngredientsSummary(mealId: string) {
-    const ingredientsList = await prisma.ingredients.findMany({
-        where: {
-            mealId: mealId,
-        },
-    });
+    // const ingredientsList = await prisma.ingredients.findMany({
+    //     where: {
+    //         mealId: mealId,
+    //     },
+    // });
 
     const nutrientsSubTotal = await prisma.ingredients.aggregate({
         _sum: {
@@ -31,7 +31,7 @@ export async function getIngredientsSummary(mealId: string) {
         fats: nutrientsSubTotal._sum.fats ?? 0,
         proteins: nutrientsSubTotal._sum.proteins ?? 0,
         kcals: nutrientsSubTotal._sum.kcals ?? 0,
-        ingredientsList: ingredientsList,
+        // ingredientsList: ingredientsList,
     };
 
     return ingredientsSummary;

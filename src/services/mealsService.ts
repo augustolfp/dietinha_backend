@@ -19,31 +19,42 @@ export async function createMeal(meal: IMealData, userId: string) {
     });
 }
 
+export async function getMealSummary(mealId: string, userId: string) {
+    const mealOwnerId = await mealRepo.getMealOwner(mealId);
+
+    if (mealOwnerId !== userId) {
+        throw new ApiError("User does not have a meal with provided id", 404);
+    }
+
+    const mealSummary = await ingredientRepo.getIngredientsSummary(mealId);
+    return { id: mealId, ...mealSummary };
+}
+
 export async function getMealsByDay(dailyLogId: string) {
     const meals = await mealRepo.getMealsList(dailyLogId);
 
     return meals;
 }
 
-export async function getMealsDetailsByDay(dailyLogId: string) {
-    const meals = await mealRepo.getMealsList(dailyLogId);
+// export async function getMealsDetailsByDay(dailyLogId: string) {
+//     const meals = await mealRepo.getMealsList(dailyLogId);
 
-    const getWithPromiseAll = async () => {
-        let data = await Promise.all(
-            meals.map(async (meal) => {
-                const ingredientsSummary =
-                    await ingredientRepo.getIngredientsSummary(meal.id);
-                return {
-                    ...meal,
-                    ...ingredientsSummary,
-                };
-            })
-        );
-        return data;
-    };
+//     const getWithPromiseAll = async () => {
+//         let data = await Promise.all(
+//             meals.map(async (meal) => {
+//                 const ingredientsSummary =
+//                     await ingredientRepo.getIngredientsSummary(meal.id);
+//                 return {
+//                     ...meal,
+//                     ...ingredientsSummary,
+//                 };
+//             })
+//         );
+//         return data;
+//     };
 
-    return getWithPromiseAll();
-}
+//     return getWithPromiseAll();
+// }
 
 export async function deleteMeal(mealId: string, userId: string) {
     const mealOwnerId = await mealRepo.getMealOwner(mealId);
