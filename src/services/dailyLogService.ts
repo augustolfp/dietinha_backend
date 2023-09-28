@@ -57,16 +57,7 @@ export async function getUserDaysSummary(userId: string) {
     return formattedDaysSummary;
 }
 
-export async function getDailyLogStats(dailyLogId: string) {
-    const nutrientsTotal = await ingredientsService.getNutrientTotalByDay(
-        dailyLogId
-    );
-    const dayBasicInfo = await dailyLogRepo.getDayBasicInfo(dailyLogId);
-    const { date, ...rest } = dayBasicInfo;
-    return { ...nutrientsTotal, ...rest };
-}
-
-export async function getDailyLogDetails(dailyLogId: string, userId: string) {
+export async function getDailyLogStats(dailyLogId: string, userId: string) {
     const dayBasicInfo = await dailyLogRepo.getDayBasicInfo(dailyLogId);
 
     if (dayBasicInfo.userId !== userId) {
@@ -76,21 +67,40 @@ export async function getDailyLogDetails(dailyLogId: string, userId: string) {
         );
     }
 
-    const mealsList = await mealsService.getMealsDetailsByDay(dailyLogId);
+    const { date, ...rest } = dayBasicInfo;
 
-    const dayNutrientTotal = await ingredientsService.getNutrientTotalByDay(
+    const nutrientsTotal = await ingredientsService.getNutrientTotalByDay(
         dailyLogId
     );
 
-    const detailedDailyLog = {
-        ...dayBasicInfo,
-        date: format(dayBasicInfo.date, "yyyy-MM-dd"),
-        ...dayNutrientTotal,
-        mealsList: [...mealsList],
-    };
-
-    return detailedDailyLog;
+    return { ...nutrientsTotal, ...rest };
 }
+
+// export async function getDailyLogDetails(dailyLogId: string, userId: string) {
+//     const dayBasicInfo = await dailyLogRepo.getDayBasicInfo(dailyLogId);
+
+//     if (dayBasicInfo.userId !== userId) {
+//         throw new ApiError(
+//             "User does not have a daily-log with provided id",
+//             404
+//         );
+//     }
+
+//     const mealsList = await mealsService.getMealsDetailsByDay(dailyLogId);
+
+//     const dayNutrientTotal = await ingredientsService.getNutrientTotalByDay(
+//         dailyLogId
+//     );
+
+//     const detailedDailyLog = {
+//         ...dayBasicInfo,
+//         date: format(dayBasicInfo.date, "yyyy-MM-dd"),
+//         ...dayNutrientTotal,
+//         mealsList: [...mealsList],
+//     };
+
+//     return detailedDailyLog;
+// }
 
 export async function deleteDay(dailyLogId: string, userId: string) {
     const dailyLog = await dailyLogRepo.getDayBasicInfo(dailyLogId);

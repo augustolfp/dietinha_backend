@@ -54,7 +54,7 @@
             "get": {
                 "tags": ["Daily-Logs"],
                 "summary": "Get user's Daily Logs",
-                "description": "Returns a summary of calories intake by day, for specific user",
+                "description": "Returns an Array containing all Registered Daily-logs for the User",
                 "responses": {
                     "200": {
                         "description": "Successful operation",
@@ -78,72 +78,7 @@
         "/daily-log/{daily-log-id}": {
             "get": {
                 "tags": ["Daily-Logs"],
-                "summary": "Get a detailed description of a specific user daily-log",
-                "description": "",
-                "parameters": [
-                    {
-                        "name": "daily-log-id",
-                        "in": "path",
-                        "description": "Id of the daily-log",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful operation",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ReceivedDetailedDailyLog"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Missing or Invalid Credentials"
-                    },
-                    "404": {
-                        "description": "User does not have a daily-log with provided id"
-                    }
-                }
-            },
-            "delete": {
-                "tags": ["Daily-Logs"],
-                "summary": "Delete one daily-log",
-                "description": "All meals and ingredients related to this meal will also be deleted",
-                "parameters": [
-                    {
-                        "name": "daily-log-id",
-                        "in": "path",
-                        "description": "Id of the daily-log to delete",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful operation"
-                    },
-                    "401": {
-                        "description": "Missing or Invalid Credentials"
-                    },
-                    "404": {
-                        "description": "User does not have a daily-log with provided id"
-                    }
-                }
-            }
-        },
-        "/daily-log/details/{daily-log-id}": {
-            "get": {
-                "tags": ["Daily-Logs"],
-                "summary": "Get stats from a specific daily-log",
+                "summary": "Get the info summary of a specific daily-log",
                 "description": "",
                 "parameters": [
                     {
