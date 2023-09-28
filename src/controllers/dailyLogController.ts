@@ -19,6 +19,13 @@ export async function getDaysFromUser(req: Request, res: Response) {
     return res.status(200).send(result);
 }
 
+export async function getDailyLogStats(req: Request, res: Response) {
+    const dailyLogId: string = req.params.dailyLogId;
+
+    const result = await dailyLogService.getDailyLogStats(dailyLogId);
+    return res.status(200).send(result);
+}
+
 export async function getDayDetailed(req: Request, res: Response) {
     const dailyLogId: string = req.params.dailyLogId;
     const userId = res.locals.userId;

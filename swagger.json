@@ -140,6 +140,43 @@
                 }
             }
         },
+        "/daily-log/details/{daily-log-id}": {
+            "get": {
+                "tags": ["Daily-Logs"],
+                "summary": "Get stats from a specific daily-log",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "daily-log-id",
+                        "in": "path",
+                        "description": "Id of the daily-log",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DailyLogStats"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or Invalid Credentials"
+                    },
+                    "404": {
+                        "description": "User does not have a daily-log with provided id"
+                    }
+                }
+            }
+        },
         "/meal": {
             "post": {
                 "tags": ["Meals"],
@@ -414,38 +451,6 @@
                     "date": {
                         "type": "string",
                         "example": "yyyy-MM-dd"
-                    },
-                    "notes": {
-                        "type": "string",
-                        "example": "It was a busy day, couldn't cook anything myself"
-                    },
-                    "userId": {
-                        "type": "string",
-                        "format": "uuid"
-                    },
-                    "caloriesTarget": {
-                        "type": "number",
-                        "example": 2500
-                    },
-                    "proteinsTarget": {
-                        "type": "number",
-                        "example": 130
-                    },
-                    "carbs": {
-                        "type": "number",
-                        "example": 0
-                    },
-                    "fats": {
-                        "type": "number",
-                        "example": 0
-                    },
-                    "proteins": {
-                        "type": "number",
-                        "example": 0
-                    },
-                    "kcals": {
-                        "type": "number",
-                        "example": 0
                     }
                 }
             },
@@ -690,6 +695,47 @@
                             "type": "object",
                             "$ref": "#/components/schemas/Meal"
                         }
+                    }
+                }
+            },
+            "DailyLogStats": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "notes": {
+                        "type": "string",
+                        "example": "It was a busy day, couldn't cook anything myself"
+                    },
+                    "userId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "caloriesTarget": {
+                        "type": "number",
+                        "example": 2500
+                    },
+                    "proteinsTarget": {
+                        "type": "number",
+                        "example": 130
+                    },
+                    "carbs": {
+                        "type": "number",
+                        "example": 0
+                    },
+                    "fats": {
+                        "type": "number",
+                        "example": 0
+                    },
+                    "proteins": {
+                        "type": "number",
+                        "example": 0
+                    },
+                    "kcals": {
+                        "type": "number",
+                        "example": 0
                     }
                 }
             },

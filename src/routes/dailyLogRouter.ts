@@ -20,6 +20,12 @@ dailyLogRouter.get(
 );
 
 dailyLogRouter.get(
+    "/daily-log/details/:dailyLogId",
+    tokenValidationMW,
+    dailyLogController.getDailyLogStats
+);
+
+dailyLogRouter.get(
     "/daily-log/:dailyLogId",
     tokenValidationMW,
     dailyLogController.getDayDetailed
