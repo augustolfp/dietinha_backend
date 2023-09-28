@@ -254,7 +254,7 @@
                 }
             }
         },
-        "/ingredient": {
+        "/ingredients": {
             "post": {
                 "tags": ["Ingredients"],
                 "summary": "Insert new Ingredient, as a part of a Meal",
@@ -332,7 +332,7 @@
                 }
             }
         },
-        "/ingredient/{ingredientId}": {
+        "/ingredients/{ingredientId}": {
             "delete": {
                 "tags": ["Ingredients"],
                 "summary": "Delete one ingredient",
