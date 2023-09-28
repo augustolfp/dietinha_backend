@@ -7,14 +7,14 @@ import { mealSchema } from "../schemas/mealsSchemas";
 const mealsRouter = Router();
 
 mealsRouter.post(
-    "/meal",
+    "/meals",
     tokenValidationMW,
     validateSchemaMW(mealSchema),
     mealsController.insertMeal
 );
 
 mealsRouter.delete(
-    "/meal/:mealId",
+    "/meals/:mealId",
     tokenValidationMW,
     mealsController.deleteMeal
 );
