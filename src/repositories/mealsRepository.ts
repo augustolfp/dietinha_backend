@@ -1,5 +1,6 @@
 import { prisma } from "../config/database";
 import { IMealData } from "../types/mealType";
+import { ApiError } from "../helpers/api-errors";
 
 export async function createMeal(meal: IMealData) {
     return await prisma.meals.create({
@@ -18,20 +19,23 @@ export async function getMealsList(dailyLogId: string) {
 }
 
 export async function getMealOwner(mealId: string) {
-    const owner = await prisma.meals.findUnique({
-        where: {
-            id: mealId,
-        },
-        select: {
-            dailyLog: {
-                select: {
-                    userId: true,
+    try {
+        const owner = await prisma.meals.findUniqueOrThrow({
+            where: {
+                id: mealId,
+            },
+            select: {
+                dailyLog: {
+                    select: {
+                        userId: true,
+                    },
                 },
             },
-        },
-    });
-
-    return owner.dailyLog.userId;
+        });
+        return owner.dailyLog.userId;
+    } catch (err) {
+        throw new ApiError("User does not have a meal with provided id", 404);
+    }
 }
 
 export async function deleteMeal(mealId: string) {
