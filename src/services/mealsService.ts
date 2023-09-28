@@ -19,6 +19,12 @@ export async function createMeal(meal: IMealData, userId: string) {
     });
 }
 
+export async function getMealsByDay(dailyLogId: string) {
+    const meals = await mealRepo.getMealsList(dailyLogId);
+
+    return meals;
+}
+
 export async function getMealsDetailsByDay(dailyLogId: string) {
     const meals = await mealRepo.getMealsList(dailyLogId);
 

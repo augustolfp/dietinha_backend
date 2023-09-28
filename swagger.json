@@ -215,6 +215,43 @@
                 }
             }
         },
+        "/meals/{daily-log-id}": {
+            "get": {
+                "tags": ["Meals"],
+                "summary": "Get the list of meals for a day",
+                "description": "Get the list of meals (basic data) for specific days",
+                "parameters": [
+                    {
+                        "name": "daily-log-id",
+                        "in": "path",
+                        "description": "Id of the daily-log",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Meals"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or Invalid Credentials"
+                    }
+                }
+            }
+        },
         "/meal/{mealId}": {
             "delete": {
                 "tags": ["Meals"],
@@ -802,6 +839,30 @@
                     "kcals": {
                         "type": "number",
                         "example": 250
+                    }
+                }
+            },
+            "Meals": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Almoço"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Casa da vovó"
+                    },
+                    "createdAt": {
+                        "type": "string"
+                    },
+                    "dailyLogId": {
+                        "type": "string",
+                        "format": "uuid"
                     }
                 }
             },

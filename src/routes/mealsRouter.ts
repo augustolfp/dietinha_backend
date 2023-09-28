@@ -19,4 +19,10 @@ mealsRouter.delete(
     mealsController.deleteMeal
 );
 
+mealsRouter.get(
+    "/meals/:dailyLogId",
+    tokenValidationMW,
+    mealsController.getMeals
+);
+
 export default mealsRouter;
