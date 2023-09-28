@@ -36,26 +36,6 @@ export async function getMealsByDay(dailyLogId: string) {
     return meals;
 }
 
-// export async function getMealsDetailsByDay(dailyLogId: string) {
-//     const meals = await mealRepo.getMealsList(dailyLogId);
-
-//     const getWithPromiseAll = async () => {
-//         let data = await Promise.all(
-//             meals.map(async (meal) => {
-//                 const ingredientsSummary =
-//                     await ingredientRepo.getIngredientsSummary(meal.id);
-//                 return {
-//                     ...meal,
-//                     ...ingredientsSummary,
-//                 };
-//             })
-//         );
-//         return data;
-//     };
-
-//     return getWithPromiseAll();
-// }
-
 export async function deleteMeal(mealId: string, userId: string) {
     const mealOwnerId = await mealRepo.getMealOwner(mealId);
 
