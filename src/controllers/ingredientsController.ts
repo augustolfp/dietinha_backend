@@ -22,3 +22,11 @@ export async function deleteIngredient(req: Request, res: Response) {
 
     return res.status(200).send("Successful operation");
 }
+
+export async function getIngredients(req: Request, res: Response) {
+    const mealId: string = req.params.mealId;
+
+    const result = await ingredientsService.getIngredientsList(mealId);
+
+    return res.status(200).send(result);
+}
