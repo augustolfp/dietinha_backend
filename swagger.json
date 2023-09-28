@@ -54,7 +54,7 @@
             "get": {
                 "tags": ["Daily-Logs"],
                 "summary": "Get user's Daily Logs",
-                "description": "Returns a summary of calories intake by day, for specific user",
+                "description": "Returns an Array containing all Registered Daily-logs for the User",
                 "responses": {
                     "200": {
                         "description": "Successful operation",
@@ -78,7 +78,7 @@
         "/daily-log/{daily-log-id}": {
             "get": {
                 "tags": ["Daily-Logs"],
-                "summary": "Get a detailed description of a specific user daily-log",
+                "summary": "Get the info summary of a specific daily-log",
                 "description": "",
                 "parameters": [
                     {
@@ -98,7 +98,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ReceivedDetailedDailyLog"
+                                    "$ref": "#/components/schemas/DailyLogStats"
                                 }
                             }
                         }
@@ -110,37 +110,9 @@
                         "description": "User does not have a daily-log with provided id"
                     }
                 }
-            },
-            "delete": {
-                "tags": ["Daily-Logs"],
-                "summary": "Delete one daily-log",
-                "description": "All meals and ingredients related to this meal will also be deleted",
-                "parameters": [
-                    {
-                        "name": "daily-log-id",
-                        "in": "path",
-                        "description": "Id of the daily-log to delete",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful operation"
-                    },
-                    "401": {
-                        "description": "Missing or Invalid Credentials"
-                    },
-                    "404": {
-                        "description": "User does not have a daily-log with provided id"
-                    }
-                }
             }
         },
-        "/meal": {
+        "/meals": {
             "post": {
                 "tags": ["Meals"],
                 "summary": "Insert new Meal, as a part of a Daily-Log",
@@ -178,7 +150,44 @@
                 }
             }
         },
-        "/meal/{mealId}": {
+        "/meals/{daily-log-id}": {
+            "get": {
+                "tags": ["Meals"],
+                "summary": "Get the meals list of a Daily-log",
+                "description": "Get the list of meals (basic data) for specific days",
+                "parameters": [
+                    {
+                        "name": "daily-log-id",
+                        "in": "path",
+                        "description": "Id of the daily-log",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Meals"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or Invalid Credentials"
+                    }
+                }
+            }
+        },
+        "/meals/{mealId}": {
             "delete": {
                 "tags": ["Meals"],
                 "summary": "Delete one meal",
@@ -414,38 +423,6 @@
                     "date": {
                         "type": "string",
                         "example": "yyyy-MM-dd"
-                    },
-                    "notes": {
-                        "type": "string",
-                        "example": "It was a busy day, couldn't cook anything myself"
-                    },
-                    "userId": {
-                        "type": "string",
-                        "format": "uuid"
-                    },
-                    "caloriesTarget": {
-                        "type": "number",
-                        "example": 2500
-                    },
-                    "proteinsTarget": {
-                        "type": "number",
-                        "example": 130
-                    },
-                    "carbs": {
-                        "type": "number",
-                        "example": 0
-                    },
-                    "fats": {
-                        "type": "number",
-                        "example": 0
-                    },
-                    "proteins": {
-                        "type": "number",
-                        "example": 0
-                    },
-                    "kcals": {
-                        "type": "number",
-                        "example": 0
                     }
                 }
             },
@@ -693,6 +670,47 @@
                     }
                 }
             },
+            "DailyLogStats": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "notes": {
+                        "type": "string",
+                        "example": "It was a busy day, couldn't cook anything myself"
+                    },
+                    "userId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "caloriesTarget": {
+                        "type": "number",
+                        "example": 2500
+                    },
+                    "proteinsTarget": {
+                        "type": "number",
+                        "example": 130
+                    },
+                    "carbs": {
+                        "type": "number",
+                        "example": 0
+                    },
+                    "fats": {
+                        "type": "number",
+                        "example": 0
+                    },
+                    "proteins": {
+                        "type": "number",
+                        "example": 0
+                    },
+                    "kcals": {
+                        "type": "number",
+                        "example": 0
+                    }
+                }
+            },
             "SentCustomLog": {
                 "type": "object",
                 "properties": {
@@ -756,6 +774,30 @@
                     "kcals": {
                         "type": "number",
                         "example": 250
+                    }
+                }
+            },
+            "Meals": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Almoço"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Casa da vovó"
+                    },
+                    "createdAt": {
+                        "type": "string"
+                    },
+                    "dailyLogId": {
+                        "type": "string",
+                        "format": "uuid"
                     }
                 }
             },

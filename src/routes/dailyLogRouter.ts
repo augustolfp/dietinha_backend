@@ -22,7 +22,7 @@ dailyLogRouter.get(
 dailyLogRouter.get(
     "/daily-log/:dailyLogId",
     tokenValidationMW,
-    dailyLogController.getDayDetailed
+    dailyLogController.getDailyLogStats
 );
 
 dailyLogRouter.delete(
