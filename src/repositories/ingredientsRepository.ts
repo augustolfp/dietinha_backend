@@ -37,6 +37,16 @@ export async function getIngredientsSummary(mealId: string) {
     return ingredientsSummary;
 }
 
+export async function getIngredientsList(mealId: string) {
+    const ingredientsList = await prisma.ingredients.findMany({
+        where: {
+            mealId: mealId,
+        },
+    });
+
+    return ingredientsList;
+}
+
 export async function getNutrientTotalByDay(dailyLogId: string) {
     return await prisma.ingredients.aggregate({
         _sum: {

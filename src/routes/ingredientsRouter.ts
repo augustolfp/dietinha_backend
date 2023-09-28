@@ -6,6 +6,12 @@ import { ingredientSchema } from "../schemas/ingredientsSchemas";
 
 const ingredientsRouter = Router();
 
+ingredientsRouter.get(
+    "/ingredients/:mealId",
+    tokenValidationMW,
+    ingredientsController.getIngredients
+);
+
 ingredientsRouter.post(
     "/ingredient",
     tokenValidationMW,

@@ -53,3 +53,7 @@ export async function deleteIngredient(ingredientId: string, userId: string) {
 
     return await ingredientsRepo.deleteIngredient(ingredientId);
 }
+
+export async function getIngredientsList(mealId: string) {
+    return await ingredientsRepo.getIngredientsList(mealId);
+}
