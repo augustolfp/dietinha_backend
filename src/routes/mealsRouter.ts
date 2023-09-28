@@ -25,4 +25,10 @@ mealsRouter.get(
     mealsController.getMeals
 );
 
+mealsRouter.get(
+    "/meals/:mealId/summary",
+    tokenValidationMW,
+    mealsController.getMealSummary
+);
+
 export default mealsRouter;

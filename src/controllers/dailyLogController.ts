@@ -31,7 +31,7 @@ export async function deleteDailyLog(req: Request, res: Response) {
     const dailyLogId: string = req.params.dailyLogId;
     const userId = res.locals.userId;
 
-    await dailyLogService.deleteDay(dailyLogId, userId);
+    const result = await dailyLogService.deleteDay(dailyLogId, userId);
 
-    return res.status(200).send("Successful operation");
+    return res.status(200).send(result);
 }

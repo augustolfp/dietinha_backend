@@ -13,14 +13,14 @@ ingredientsRouter.get(
 );
 
 ingredientsRouter.post(
-    "/ingredient",
+    "/ingredients",
     tokenValidationMW,
     validateSchemaMW(ingredientSchema),
     ingredientsController.insertIngredient
 );
 
 ingredientsRouter.delete(
-    "/ingredient/:ingredientId",
+    "/ingredients/:ingredientId",
     tokenValidationMW,
     ingredientsController.deleteIngredient
 );

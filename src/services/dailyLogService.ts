@@ -32,22 +32,6 @@ export async function addDay(dailyLog: IDailyLogData) {
 export async function getUserDaysSummary(userId: string) {
     const daysBasicInfo = await dailyLogRepo.getUserDays(userId);
 
-    // const getWithPromiseAll = async () => {
-    //     let data = await Promise.all(
-    //         daysBasicInfo.map(async (dailyLog) => {
-    //             const nutrientsTotal =
-    //                 await ingredientsService.getNutrientTotalByDay(dailyLog.id);
-    //             return {
-    //                 ...dailyLog,
-    //                 date: format(dailyLog.date, "yyyy-MM-dd"),
-    //                 ...nutrientsTotal,
-    //             };
-    //         })
-    //     );
-    //     return data;
-    // };
-
-    // return getWithPromiseAll();
     const formattedDaysSummary = daysBasicInfo.map((dailyLog) => {
         return {
             id: dailyLog.id,
@@ -75,32 +59,6 @@ export async function getDailyLogStats(dailyLogId: string, userId: string) {
 
     return { ...nutrientsTotal, ...rest };
 }
-
-// export async function getDailyLogDetails(dailyLogId: string, userId: string) {
-//     const dayBasicInfo = await dailyLogRepo.getDayBasicInfo(dailyLogId);
-
-//     if (dayBasicInfo.userId !== userId) {
-//         throw new ApiError(
-//             "User does not have a daily-log with provided id",
-//             404
-//         );
-//     }
-
-//     const mealsList = await mealsService.getMealsDetailsByDay(dailyLogId);
-
-//     const dayNutrientTotal = await ingredientsService.getNutrientTotalByDay(
-//         dailyLogId
-//     );
-
-//     const detailedDailyLog = {
-//         ...dayBasicInfo,
-//         date: format(dayBasicInfo.date, "yyyy-MM-dd"),
-//         ...dayNutrientTotal,
-//         mealsList: [...mealsList],
-//     };
-
-//     return detailedDailyLog;
-// }
 
 export async function deleteDay(dailyLogId: string, userId: string) {
     const dailyLog = await dailyLogRepo.getDayBasicInfo(dailyLogId);

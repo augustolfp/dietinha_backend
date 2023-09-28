@@ -19,6 +19,15 @@ export async function getMeals(req: Request, res: Response) {
     return res.status(200).send(result);
 }
 
+export async function getMealSummary(req: Request, res: Response) {
+    const mealId: string = req.params.mealId;
+    const userId: string = res.locals.userId;
+
+    const result = await mealsService.getMealSummary(mealId, userId);
+
+    return res.status(200).send(result);
+}
+
 export async function deleteMeal(req: Request, res: Response) {
     const mealId: string = req.params.mealId;
     const userId: string = res.locals.userId;
