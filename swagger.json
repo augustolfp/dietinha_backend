@@ -76,6 +76,41 @@
             }
         },
         "/daily-log/{daily-log-id}": {
+            "delete": {
+                "tags": ["Daily-Logs"],
+                "summary": "Delete a Daily-log",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "daily-log-id",
+                        "in": "path",
+                        "description": "Id of the daily-log",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ReceivedDailyLog"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or Invalid Credentials"
+                    },
+                    "404": {
+                        "description": "User does not have a daily-log with provided id"
+                    }
+                }
+            },
             "get": {
                 "tags": ["Daily-Logs"],
                 "summary": "Get the info summary of a specific daily-log",
