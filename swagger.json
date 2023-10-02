@@ -789,6 +789,10 @@
                         "type": "string",
                         "format": "uuid"
                     },
+                    "date": {
+                        "type": "string",
+                        "example": "yyyy-MM-dd"
+                    },
                     "notes": {
                         "type": "string",
                         "example": "It was a busy day, couldn't cook anything myself"
@@ -820,6 +824,13 @@
                     "kcals": {
                         "type": "number",
                         "example": 0
+                    },
+                    "mealsList": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "$ref": "#/components/schemas/ReceivedMeal"
+                        }
                     }
                 }
             },

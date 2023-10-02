@@ -1,3 +1,4 @@
+import * as mealRepo from "../repositories/mealsRepository";
 import { format } from "date-fns";
 import * as dailyLogRepo from "../repositories/dailyLogsRepository";
 import * as mealsService from "./mealsService";
@@ -51,13 +52,20 @@ export async function getDailyLogStats(dailyLogId: string, userId: string) {
         );
     }
 
-    const { date, ...rest } = dayBasicInfo;
+    const formattedDate = format(dayBasicInfo.date, "yyyy-MM-dd");
 
     const nutrientsTotal = await ingredientsService.getNutrientTotalByDay(
         dailyLogId
     );
 
-    return { ...nutrientsTotal, ...rest };
+    const mealsList = await mealRepo.getMealsList(dailyLogId);
+
+    return {
+        ...nutrientsTotal,
+        ...dayBasicInfo,
+        date: formattedDate,
+        mealsList: mealsList,
+    };
 }
 
 export async function deleteDay(dailyLogId: string, userId: string) {
