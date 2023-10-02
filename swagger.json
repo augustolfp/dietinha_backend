@@ -324,36 +324,6 @@
             }
         },
         "/meals/{mealId}": {
-            "delete": {
-                "tags": ["Meals"],
-                "summary": "Delete one meal",
-                "description": "All ingredients related to this meal will also be deleted",
-                "parameters": [
-                    {
-                        "name": "mealId",
-                        "in": "path",
-                        "description": "Id of the meal to delete",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful operation"
-                    },
-                    "401": {
-                        "description": "Missing or Invalid Credentials"
-                    },
-                    "404": {
-                        "description": "User does not have a meal with provided id"
-                    }
-                }
-            }
-        },
-        "/meals/{mealId}/summary": {
             "get": {
                 "tags": ["Meals"],
                 "summary": "Get the info summary of a specific meal",
@@ -408,6 +378,34 @@
                     },
                     "404": {
                         "description": "User does not have a Meal with provided id"
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Meals"],
+                "summary": "Delete one meal",
+                "description": "All ingredients related to this meal will also be deleted",
+                "parameters": [
+                    {
+                        "name": "mealId",
+                        "in": "path",
+                        "description": "Id of the meal to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Missing or Invalid Credentials"
+                    },
+                    "404": {
+                        "description": "User does not have a meal with provided id"
                     }
                 }
             }

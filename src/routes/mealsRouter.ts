@@ -20,7 +20,7 @@ mealsRouter.delete(
 );
 
 mealsRouter.get(
-    "/meals/:mealId/summary",
+    "/meals/:mealId",
     tokenValidationMW,
     mealsController.getMealSummary
 );
