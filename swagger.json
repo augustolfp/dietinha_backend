@@ -185,43 +185,6 @@
                 }
             }
         },
-        "/meals/{daily-log-id}": {
-            "get": {
-                "tags": ["Meals"],
-                "summary": "Get the meals list of a Daily-log",
-                "description": "Get the list of meals (basic data) for specific days",
-                "parameters": [
-                    {
-                        "name": "daily-log-id",
-                        "in": "path",
-                        "description": "Id of the daily-log",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful operation",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/Meals"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Missing or Invalid Credentials"
-                    }
-                }
-            }
-        },
         "/meals/{mealId}": {
             "delete": {
                 "tags": ["Meals"],

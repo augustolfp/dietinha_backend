@@ -11,14 +11,6 @@ export async function insertMeal(req: Request, res: Response) {
     return res.status(201).send(result);
 }
 
-export async function getMeals(req: Request, res: Response) {
-    const dailyLogId: string = req.params.dailyLogId;
-
-    const result = await mealsService.getMealsByDay(dailyLogId);
-
-    return res.status(200).send(result);
-}
-
 export async function getMealSummary(req: Request, res: Response) {
     const mealId: string = req.params.mealId;
     const userId: string = res.locals.userId;

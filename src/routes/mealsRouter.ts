@@ -20,12 +20,6 @@ mealsRouter.delete(
 );
 
 mealsRouter.get(
-    "/meals/:dailyLogId",
-    tokenValidationMW,
-    mealsController.getMeals
-);
-
-mealsRouter.get(
     "/meals/:mealId/summary",
     tokenValidationMW,
     mealsController.getMealSummary
