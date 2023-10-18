@@ -7,9 +7,9 @@ export async function createIngredient(
     ingredient: IIngredientData,
     userId: string
 ) {
-    const mealOwnerId = await mealsRepo.getMealOwner(ingredient.mealId);
+    const meal = await mealsRepo.getMealBasicInfo(ingredient.mealId);
 
-    if (mealOwnerId !== userId) {
+    if (meal.dailyLog.userId !== userId) {
         throw new ApiError("User does not have a meal with provided id", 404);
     }
 
@@ -42,9 +42,9 @@ export async function getNutrientTotalByDay(countedDayId: string) {
 
 export async function deleteIngredient(ingredientId: string, userId: string) {
     const { mealId } = await ingredientsRepo.findIngredient(ingredientId);
-    const ingredientOwner = await mealsRepo.getMealOwner(mealId);
+    const meal = await mealsRepo.getMealBasicInfo(mealId);
 
-    if (ingredientOwner !== userId) {
+    if (meal.dailyLog.userId !== userId) {
         throw new ApiError(
             "User does not have a ingredient with provided id",
             404

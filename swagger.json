@@ -386,6 +386,17 @@
                                             "type": "string",
                                             "format": "uuid"
                                         },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Almoço"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "Casa da vovó"
+                                        },
+                                        "createdAt": {
+                                            "type": "string"
+                                        },
                                         "carbs": {
                                             "type": "number",
                                             "example": 20

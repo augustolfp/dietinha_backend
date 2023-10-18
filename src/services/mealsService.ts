@@ -20,14 +20,14 @@ export async function createMeal(meal: IMealData, userId: string) {
 }
 
 export async function getMealSummary(mealId: string, userId: string) {
-    const mealOwnerId = await mealRepo.getMealOwner(mealId);
+    const meal = await mealRepo.getMealBasicInfo(mealId);
 
-    if (mealOwnerId !== userId) {
+    if (meal.dailyLog.userId !== userId) {
         throw new ApiError("User does not have a meal with provided id", 404);
     }
 
     const mealSummary = await ingredientRepo.getIngredientsSummary(mealId);
-    return { id: mealId, ...mealSummary };
+    return { id: mealId, name: meal.name, description: meal.description, createdAt: meal.createdAt, ...mealSummary };
 }
 
 export async function getMealsByDay(dailyLogId: string, userId: string) {
@@ -46,9 +46,9 @@ export async function getMealsByDay(dailyLogId: string, userId: string) {
 }
 
 export async function deleteMeal(mealId: string, userId: string) {
-    const mealOwnerId = await mealRepo.getMealOwner(mealId);
+    const meal = await mealRepo.getMealBasicInfo(mealId);
 
-    if (mealOwnerId !== userId) {
+    if (meal.dailyLog.userId !== userId) {
         throw new ApiError("User does not have a meal with provided id", 404);
     }
 

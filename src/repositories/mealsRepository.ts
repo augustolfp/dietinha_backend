@@ -18,9 +18,9 @@ export async function getMealsList(dailyLogId: string) {
     return mealsList;
 }
 
-export async function getMealOwner(mealId: string) {
+export async function getMealBasicInfo(mealId: string) {
     try {
-        const owner = await prisma.meals.findUniqueOrThrow({
+        const meal = await prisma.meals.findUniqueOrThrow({
             where: {
                 id: mealId,
             },
@@ -30,9 +30,12 @@ export async function getMealOwner(mealId: string) {
                         userId: true,
                     },
                 },
+                name: true,
+                description: true,
+                createdAt: true
             },
         });
-        return owner.dailyLog.userId;
+        return meal
     } catch (err) {
         throw new ApiError("User does not have a meal with provided id", 404);
     }
