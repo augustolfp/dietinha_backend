@@ -58,13 +58,10 @@ export async function getDailyLogStats(dailyLogId: string, userId: string) {
         dailyLogId
     );
 
-    const mealsList = await mealRepo.getMealsList(dailyLogId);
-
     return {
         ...nutrientsTotal,
         ...dayBasicInfo,
         date: formattedDate,
-        mealsList: mealsList,
     };
 }
 

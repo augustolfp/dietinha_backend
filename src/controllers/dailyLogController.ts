@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import * as dailyLogService from "../services/dailyLogService";
+import * as mealsService from "../services/mealsService"
 import { IDailyLogData } from "../types/dailyLogType";
 
 export async function addDay(req: Request, res: Response) {
@@ -25,6 +26,14 @@ export async function getDailyLogStats(req: Request, res: Response) {
 
     const result = await dailyLogService.getDailyLogStats(dailyLogId, userId);
     return res.status(200).send(result);
+}
+
+export async function getDailyLogMeals(req: Request, res: Response) {
+    const dailyLogId: string = req.params.dailyLogId;
+    const userId: string = res.locals.userId;
+
+    const result = await mealsService.getMealsByDay(dailyLogId, userId)
+    return res.status(200).send(result)
 }
 
 export async function deleteDailyLog(req: Request, res: Response) {

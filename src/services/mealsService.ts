@@ -30,7 +30,16 @@ export async function getMealSummary(mealId: string, userId: string) {
     return { id: mealId, ...mealSummary };
 }
 
-export async function getMealsByDay(dailyLogId: string) {
+export async function getMealsByDay(dailyLogId: string, userId: string) {
+    const dailyLog = await dailyLogRepo.getDayBasicInfo(dailyLogId);
+
+    if (dailyLog.userId !== userId) {
+        throw new ApiError(
+            "User does not have a daily-log with provided id",
+            404
+        );
+    }
+
     const meals = await mealRepo.getMealsList(dailyLogId);
 
     return meals;

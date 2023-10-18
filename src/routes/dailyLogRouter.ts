@@ -25,6 +25,12 @@ dailyLogRouter.get(
     dailyLogController.getDailyLogStats
 );
 
+dailyLogRouter.get(
+    "/daily-log/:dailyLogId/meals",
+    tokenValidationMW,
+    dailyLogController.getDailyLogMeals
+)
+
 dailyLogRouter.delete(
     "/daily-log/:dailyLogId",
     tokenValidationMW,
